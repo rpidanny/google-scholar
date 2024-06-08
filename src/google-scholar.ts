@@ -37,6 +37,10 @@ export class GoogleScholar {
     return `${this.GOOGLE_SCHOLAR_URL}${encodeURIComponent(keywords)}`
   }
 
+  private getUrl(path: string): string {
+    return `${this.GOOGLE_SCHOLAR_URL_PREFIX}${path}`
+  }
+
   private processHtml(html: string): ISearchResponse {
     const $ = cheerio.load(html)
 
@@ -44,14 +48,17 @@ export class GoogleScholar {
       return $(element).find('.gs_ri h3').length > 0
     })
 
-    const nextUrl = $('.gs_ico_nav_next').parent().attr('href')
-    const prevUrl = $('.gs_ico_nav_previous').parent().attr('href')
+    const next = $('.gs_ico_nav_next').parent().attr('href')
+    const prev = $('.gs_ico_nav_previous').parent().attr('href')
+
+    const nextUrl = next ? this.getUrl(next) : null
+    const prevUrl = prev ? this.getUrl(prev) : null
 
     return {
       results: results.toArray().map(result => this.parseResult($, $(result))),
       count: this.getResultsCount($),
-      nextUrl: nextUrl ? `${this.GOOGLE_SCHOLAR_URL_PREFIX}${nextUrl}` : null,
-      prevUrl: prevUrl ? `${this.GOOGLE_SCHOLAR_URL_PREFIX}${prevUrl}` : null,
+      nextUrl,
+      prevUrl,
       next: nextUrl ? async () => this.parseUrl(nextUrl) : null,
       previous: prevUrl ? async () => this.parseUrl(prevUrl) : null,
     }
@@ -84,9 +91,11 @@ export class GoogleScholar {
     const authorElements = result.find('.gs_a').find('a')
 
     return authorElements.toArray().map(authorElement => {
+      const url = $(authorElement).attr('href')
+
       return {
         name: $(authorElement).text(),
-        url: `${this.GOOGLE_SCHOLAR_URL_PREFIX}${$(authorElement).attr('href')}` || '',
+        url: url ? this.getUrl(url) : null,
       }
     })
   }
@@ -96,21 +105,29 @@ export class GoogleScholar {
       return $(element).text().includes('Cited by')
     })
 
+    const url = citationElement.attr('href')
+
     return {
       count: parseInt(citationElement.text().replace(/\D/g, '')) || 0,
-      url: `${this.GOOGLE_SCHOLAR_URL_PREFIX}${citationElement.attr('href')}` || '',
+      url: url ? this.getUrl(url) : null,
     }
   }
 
   private getRelatedArticlesUrl(
     $: cheerio.CheerioAPI,
     result: cheerio.Cheerio<cheerio.Element>,
-  ): string {
+  ): string | null {
     const element = result.find('.gs_fl a').filter((_, el) => {
       return $(el).text().includes('Related articles')
     })
 
-    return `${this.GOOGLE_SCHOLAR_URL_PREFIX}${element.attr('href')}` || ''
+    const url = element.attr('href')
+
+    if (url) {
+      return this.getUrl(url)
+    }
+
+    return null
   }
 
   private getResultsCount($: cheerio.CheerioAPI): number {
@@ -130,7 +147,7 @@ export class GoogleScholar {
   }
 
   public async parseUrl(url: string): Promise<ISearchResponse> {
-    if (!this.isValidUrl(url)) throw new Error('Invalid URL')
+    if (!this.isValidUrl(url)) throw new Error(`Invalid URL: ${url}`)
 
     this.logger?.debug(`Searching by URL: ${url}`)
 

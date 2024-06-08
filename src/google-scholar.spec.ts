@@ -48,4 +48,28 @@ describe('GoogleScholar', () => {
   it('should throw an error if the url is not a google scholar url', async () => {
     await expect(googleScholar.parseUrl('https://example.com')).rejects.toThrow()
   })
+
+  it('should return correct next function', async () => {
+    const expectedResponse = JSON.parse(
+      await fs.readFile(`${__dirname}/../test/data/page1.json`, 'utf-8'),
+    ) as ISearchResponse
+
+    const response = await googleScholar.search('some query')
+    expect(response).toEqual({
+      ...expectedResponse,
+      next: expect.any(Function),
+      previous: null,
+    })
+
+    const parseUrlSpy = jest.spyOn(googleScholar, 'parseUrl')
+
+    const nextResponse = await response.next!()
+
+    expect(parseUrlSpy).toHaveBeenCalledWith(expectedResponse.nextUrl)
+    expect(nextResponse).toEqual({
+      ...expectedResponse,
+      next: expect.any(Function),
+      previous: null,
+    })
+  })
 })

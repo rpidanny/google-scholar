@@ -1,11 +1,11 @@
 export interface IAuthor {
   name: string
-  url: string
+  url: string | null
 }
 
 export interface ICitation {
   count: number
-  url: string
+  url: string | null
 }
 
 export interface IGoogleScholarResult {
@@ -13,7 +13,7 @@ export interface IGoogleScholarResult {
   url: string
   authors: IAuthor[]
   description: string
-  relatedArticlesUrl: string
+  relatedArticlesUrl: string | null
   paperUrl: string
   citation: ICitation
 }
