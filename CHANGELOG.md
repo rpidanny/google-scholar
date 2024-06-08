@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/rpidanny/google-scholar/compare/v1.0.0...v1.0.1) (2024-06-08)
+
+
+### Bug Fixes
+
+* next and previous method urls ([167627e](https://github.com/rpidanny/google-scholar/commit/167627e30e1216dfb7f7a1fdb3d822710a55641c))
+
 # 1.0.0 (2024-06-08)
 
 
