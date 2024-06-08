@@ -1,0 +1,202 @@
+{
+  "results": [
+    {
+      "title": "[PDF][PDF]\n                    CRISPR/Cas9-based engineering of the epigenome",
+      "url": "https://www.cell.com/cell-stem-cell/pdf/S1934-5909(17)30373-9.pdf",
+      "description": "… Here, we review the use of CRISPR/(d)Cas9 tools for epige…\n                    First, we discuss the use of the \n                    Cas9 system to examine regula… We next discuss approaches that adapt\n                    CRISPR/dCas9 for …",
+      "paperUrl": "https://www.cell.com/cell-stem-cell/pdf/S1934-5909(17)30373-9.pdf",
+      "authors": [
+        {
+          "name": "J Pulecio",
+          "url": "https://scholar.google.com/citations?user=Sxz8i00AAAAJ&hl=en&oi=sra"
+        },
+        {
+          "name": "N Verma",
+          "url": "https://scholar.google.com/citations?user=Kqq9ElMAAAAJ&hl=en&oi=sra"
+        },
+        {
+          "name": "D Huangfu",
+          "url": "https://scholar.google.com/citations?user=S9cNIqoAAAAJ&hl=en&oi=sra"
+        }
+      ],
+      "citation": {
+        "count": 275,
+        "url": "https://scholar.google.com/scholar?cites=16904881677779709089&as_sdt=2005&sciodt=0,5&hl=en"
+      },
+      "relatedArticlesUrl": "https://scholar.google.com/scholar?q=related:oawR7lE0muoJ:scholar.google.com/&scioq=crispr+cas9&hl=en&as_sdt=0,5"
+    },
+    {
+      "title": "Applications of the CRISPR–Cas9 system in cancer biology",
+      "url": "https://www.nature.com/articles/nrc3950",
+      "description": "… of Cas9 with an … via CRISPR–Cas9-mediated NHEJ and HDR,\n                    respectively (reviewed \n                    in Ref. 27). In this Progress article, we discuss several recent applications of\n                    the CRISPR–Cas9 …",
+      "paperUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4530801/",
+      "authors": [
+        {
+          "name": "FJ Sánchez-Rivera",
+          "url": "https://scholar.google.com/citations?user=4_yB86kAAAAJ&hl=en&oi=sra"
+        },
+        {
+          "name": "T Jacks",
+          "url": "https://scholar.google.com/citations?user=oVqknfsAAAAJ&hl=en&oi=sra"
+        }
+      ],
+      "citation": {
+        "count": 436,
+        "url": "https://scholar.google.com/scholar?cites=11784442669812388939&as_sdt=2005&sciodt=0,5&hl=en"
+      },
+      "relatedArticlesUrl": "https://scholar.google.com/scholar?q=related:S5Qf6ivAiqMJ:scholar.google.com/&scioq=crispr+cas9&hl=en&as_sdt=0,5"
+    },
+    {
+      "title": "Genetic screens in human cells using the CRISPR-Cas9 system",
+      "url": "https://www.science.org/doi/abs/10.1126/science.1246981",
+      "description": "… off-target activity of CRISPR-Cas9. Although the specificity of\n                    CRISPR-Cas9 has been … \n                    off-target behavior in our system, in which Cas9 and a sgRNA targeting\n                    AAVS1 (sgAAVS1) were …",
+      "paperUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3972032/",
+      "authors": [
+        {
+          "name": "T Wang",
+          "url": "https://scholar.google.com/citations?user=v8Ra8PcAAAAJ&hl=en&oi=sra"
+        },
+        {
+          "name": "DM Sabatini",
+          "url": "https://scholar.google.com/citations?user=gi0NNjgAAAAJ&hl=en&oi=sra"
+        }
+      ],
+      "citation": {
+        "count": 3294,
+        "url": "https://scholar.google.com/scholar?cites=9484162487302912620&as_sdt=2005&sciodt=0,5&hl=en"
+      },
+      "relatedArticlesUrl": "https://scholar.google.com/scholar?q=related:bHrGb4iDnoMJ:scholar.google.com/&scioq=crispr+cas9&hl=en&as_sdt=0,5"
+    },
+    {
+      "title": "CRISPR/Cas9 for genome editing: progress, implications and\n                      challenges",
+      "url": "https://academic.oup.com/hmg/article-abstract/23/R1/R40/2900693",
+      "description": "… The specificity of CRISPR/Cas9-mediated DNA cleavage requires\n                    target sequences … \n                    CRISPR/Cas9-mediated genome editing and clinical therapeutic\n                    potential of CRISPR/Cas9 …",
+      "paperUrl": "https://academic.oup.com/hmg/article/23/R1/R40/2900693?login=true",
+      "authors": [],
+      "citation": {
+        "count": 932,
+        "url": "https://scholar.google.com/scholar?cites=10946236154502099881&as_sdt=2005&sciodt=0,5&hl=en"
+      },
+      "relatedArticlesUrl": "https://scholar.google.com/scholar?q=related:qbOicMnX6JcJ:scholar.google.com/&scioq=crispr+cas9&hl=en&as_sdt=0,5"
+    },
+    {
+      "title": "Genome engineering using CRISPR-Cas9 system",
+      "url": "https://link.springer.com/protocol/10.1007/978-1-4939-1862-1_10",
+      "description": "… of CRISPR-Cas9 system, raising the possibility that an efficient\n                    and specific CRISPR-Cas9 … \n                    Here we describe a detailed protocol for applying the CRISPR-Cas9\n                    system from …",
+      "paperUrl": "",
+      "authors": [
+        {
+          "name": "L Cong",
+          "url": "https://scholar.google.com/citations?user=sfJIWdcAAAAJ&hl=en&oi=sra"
+        },
+        {
+          "name": "F Zhang",
+          "url": "https://scholar.google.com/citations?user=B5QpZooAAAAJ&hl=en&oi=sra"
+        }
+      ],
+      "citation": {
+        "count": 411,
+        "url": "https://scholar.google.com/scholar?cites=6360950291084235892&as_sdt=2005&sciodt=0,5&hl=en"
+      },
+      "relatedArticlesUrl": "https://scholar.google.com/scholar?q=related:dFT-hZaiRlgJ:scholar.google.com/&scioq=crispr+cas9&hl=en&as_sdt=0,5"
+    },
+    {
+      "title": "[PDF][PDF]\n                    Correction of a genetic disease in mouse via use of CRISPR-Cas9",
+      "url": "https://www.cell.com/cell-stem-cell/pdf/S1934-5909(13)00462-1.pdf",
+      "description": "… The CRISPR-Cas9 system has been employed to generate … rescued\n                    by coinjection into \n                    zygotes of Cas9 mRNA and a single-… use of the CRISPR-Cas9\n                    system to correct genetic disease. …",
+      "paperUrl": "https://www.cell.com/cell-stem-cell/pdf/S1934-5909(13)00462-1.pdf",
+      "authors": [
+        {
+          "name": "Y Wu",
+          "url": "https://scholar.google.com/citations?user=cmM6J-UAAAAJ&hl=en&oi=sra"
+        },
+        {
+          "name": "M Bai",
+          "url": "https://scholar.google.com/citations?user=qIAAeTgAAAAJ&hl=en&oi=sra"
+        }
+      ],
+      "citation": {
+        "count": 880,
+        "url": "https://scholar.google.com/scholar?cites=1542341785523382383&as_sdt=2005&sciodt=0,5&hl=en"
+      },
+      "relatedArticlesUrl": "https://scholar.google.com/scholar?q=related:b-hcqK5_ZxUJ:scholar.google.com/&scioq=crispr+cas9&hl=en&as_sdt=0,5"
+    },
+    {
+      "title": "Advances in CRISPR/Cas9",
+      "url": "https://onlinelibrary.wiley.com/doi/abs/10.1155/2022/9978571",
+      "description": "… CRISPR/Cas9 technology has become the most examined …\n                    CRISPR/Cas9 has shown great \n                    potential in the study of genes … basic mechanisms of the CRISPR/Cas9\n                    system, describe its …",
+      "paperUrl": "https://onlinelibrary.wiley.com/doi/pdf/10.1155/2022/9978571",
+      "authors": [],
+      "citation": {
+        "count": 28,
+        "url": "https://scholar.google.com/scholar?cites=5228992316329141288&as_sdt=2005&sciodt=0,5&hl=en"
+      },
+      "relatedArticlesUrl": "https://scholar.google.com/scholar?q=related:KKQLrM4ckUgJ:scholar.google.com/&scioq=crispr+cas9&hl=en&as_sdt=0,5"
+    },
+    {
+      "title": "CRISPR/Cas9-mediated gene editing in human tripronuclear\n                      zygotes",
+      "url": "https://academic.oup.com/proteincell/article-abstract/6/5/363/6803432",
+      "description": "… CRISPR/Cas9 system can cleave endogenous gene efficiently in\n                    human tripronuclear \n                    zygotes, and that the DSBs generated by CRISPR/Cas9 … mechanisms\n                    of CRISPR/Cas9-mediated …",
+      "paperUrl": "https://academic.oup.com/proteincell/article/6/5/363/6803432",
+      "authors": [],
+      "citation": {
+        "count": 1640,
+        "url": "https://scholar.google.com/scholar?cites=3067489489366177241&as_sdt=2005&sciodt=0,5&hl=en"
+      },
+      "relatedArticlesUrl": "https://scholar.google.com/scholar?q=related:2VXqNXDpkSoJ:scholar.google.com/&scioq=crispr+cas9&hl=en&as_sdt=0,5"
+    },
+    {
+      "title": "High-throughput functional genomics using CRISPR–Cas9",
+      "url": "https://www.nature.com/articles/nrg3899",
+      "description": "… mediated by Cas9 and RNAi. Cas9 nuclease is a component of the\n                    type II CRISPR bacterial \n                    … Targeted genome engineering with Cas9 and other nucleases exploits\n                    endogenous DNA …",
+      "paperUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4503232/",
+      "authors": [
+        {
+          "name": "O Shalem",
+          "url": "https://scholar.google.com/citations?user=h10oqQYAAAAJ&hl=en&oi=sra"
+        },
+        {
+          "name": "NE Sanjana",
+          "url": "https://scholar.google.com/citations?user=nJp9d2MAAAAJ&hl=en&oi=sra"
+        },
+        {
+          "name": "F Zhang",
+          "url": "https://scholar.google.com/citations?user=B5QpZooAAAAJ&hl=en&oi=sra"
+        }
+      ],
+      "citation": {
+        "count": 1344,
+        "url": "https://scholar.google.com/scholar?cites=3161216514249097091&as_sdt=2005&sciodt=0,5&hl=en"
+      },
+      "relatedArticlesUrl": "https://scholar.google.com/scholar?q=related:g3_qvavl3isJ:scholar.google.com/&scioq=crispr+cas9&hl=en&as_sdt=0,5"
+    },
+    {
+      "title": "[PDF][PDF]\n                    A broad-spectrum inhibitor of CRISPR-Cas9",
+      "url": "https://www.cell.com/cell/pdf/S0092-8674(17)30873-5.pdf",
+      "description": "… Domain of Cas9 The ability of AcrIIC1 to inhibit multiple\n                    Cas9 orthologs … Cas9 involved in \n                    DNA cleavage. To determine which region of Cas9 interacts with AcrIIC1,\n                    we generated Cas9 …",
+      "paperUrl": "https://www.cell.com/cell/pdf/S0092-8674(17)30873-5.pdf",
+      "authors": [
+        {
+          "name": "KW Doxzen",
+          "url": "https://scholar.google.com/citations?user=F5ogte8AAAAJ&hl=en&oi=sra"
+        },
+        {
+          "name": "JJ Liu",
+          "url": "https://scholar.google.com/citations?user=oh4D5UEAAAAJ&hl=en&oi=sra"
+        },
+        {
+          "name": "GJ Knott",
+          "url": "https://scholar.google.com/citations?user=6ZEaTGMAAAAJ&hl=en&oi=sra"
+        }
+      ],
+      "citation": {
+        "count": 276,
+        "url": "https://scholar.google.com/scholar?cites=8822244375879002023&as_sdt=2005&sciodt=0,5&hl=en"
+      },
+      "relatedArticlesUrl": "https://scholar.google.com/scholar?q=related:p6f0gYTobnoJ:scholar.google.com/&scioq=crispr+cas9&hl=en&as_sdt=0,5"
+    }
+  ],
+  "count": 594000,
+  "nextUrl": "https://scholar.google.com/scholar?start=20&q=crispr+cas9&hl=en&as_sdt=0,5",
+  "prevUrl": "https://scholar.google.com/scholar?start=0&q=crispr+cas9&hl=en&as_sdt=0,5"
+}

@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "resolveJsonModule": true,
-    "allowJs": false,
+    "allowJs": true,
     "removeComments": true,
     "isolatedModules": true,
     "declaration": true,
@@ -20,10 +20,10 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
 
-    "module": "ES2022",
+    "module": "CommonJS",
     "moduleResolution": "Node",
     "esModuleInterop": true,
-    "target": "ES2022",
+    // "target": "ES2015",
 
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -43,7 +43,6 @@
     "coverage"
   ],
   "ts-node": {
-    "esm": true,
     "transpileOnly": true
   }
 }
