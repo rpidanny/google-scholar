@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/rpidanny/google-scholar/compare/v1.1.0...v1.2.0) (2024-06-13)
+
+
+### Features
+
+* add paper type to identify pdf and html ([#11](https://github.com/rpidanny/google-scholar/issues/11)) ([60ad713](https://github.com/rpidanny/google-scholar/commit/60ad713c028cb42e6127df80f9219d0d37b41269))
+
 # [1.1.0](https://github.com/rpidanny/google-scholar/compare/v1.0.1...v1.1.0) (2024-06-13)
 
 
