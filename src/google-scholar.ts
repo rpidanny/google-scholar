@@ -69,7 +69,7 @@ export class GoogleScholar {
     $: cheerio.CheerioAPI,
     result: cheerio.Cheerio<cheerio.Element>,
   ): IGoogleScholarResult {
-    const title = result.find('.gs_ri h3').text().trim()
+    const title = sanitizeText(result.find('.gs_ri h3').text())
     const url = result.find('.gs_ri h3 a').attr('href') || ''
     const paperUrl = result.find('.gs_ggsd a').attr('href') || ''
     const description = sanitizeText(result.find('.gs_rs').text())
