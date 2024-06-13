@@ -79,19 +79,20 @@ export class GoogleScholar {
       title,
       url,
       description,
-      paper: this.getPaper($, result),
+      paper: this.getPaper(result),
       authors: this.getAuthors($, result),
       citation: this.getCitation($, result),
       relatedArticlesUrl: this.getRelatedArticlesUrl($, result),
     }
   }
 
-  private getPaper(_$: cheerio.CheerioAPI, result: cheerio.Cheerio<cheerio.Element>): IPaper {
-    const text = result.find('span.gs_ctg2').text()
+  private getPaper(result: cheerio.Cheerio<cheerio.Element>): IPaper {
+    const type =
+      result.find('span.gs_ctg2').text() === '[PDF]' ? PaperUrlType.PDF : PaperUrlType.HTML
     const url = result.find('.gs_ggsd a').attr('href') || ''
 
     return {
-      type: text === '[PDF]' ? PaperUrlType.PDF : PaperUrlType.HTML,
+      type,
       url,
     }
   }
