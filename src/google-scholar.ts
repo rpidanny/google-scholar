@@ -9,6 +9,7 @@ import {
   ISearchResponse,
   IWebClient,
 } from './interfaces'
+import { sanitizeText } from './utils'
 
 export class GoogleScholar {
   private GOOGLE_SCHOLAR_URL_PREFIX: string = 'https://scholar.google.com'
@@ -68,10 +69,10 @@ export class GoogleScholar {
     $: cheerio.CheerioAPI,
     result: cheerio.Cheerio<cheerio.Element>,
   ): IGoogleScholarResult {
-    const title = result.find('.gs_ri h3').text().trim()
+    const title = sanitizeText(result.find('.gs_ri h3').text())
     const url = result.find('.gs_ri h3 a').attr('href') || ''
     const paperUrl = result.find('.gs_ggsd a').attr('href') || ''
-    const description = result.find('.gs_rs').text().trim()
+    const description = sanitizeText(result.find('.gs_rs').text())
 
     return {
       title,
