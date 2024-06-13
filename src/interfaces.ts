@@ -1,3 +1,13 @@
+export enum PaperUrlType {
+  PDF = 'pdf',
+  HTML = 'html',
+}
+
+export interface IPaper {
+  type: PaperUrlType
+  url: string
+}
+
 export interface IAuthor {
   name: string
   url: string | null
@@ -14,7 +24,7 @@ export interface IGoogleScholarResult {
   authors: IAuthor[]
   description: string
   relatedArticlesUrl: string | null
-  paperUrl: string
+  paper: IPaper
   citation: ICitation
 }
 
