@@ -42,7 +42,7 @@
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/npm": "^11.0.0",
     "@types/jest": "^29.4.0",
-    "eslint": "^8.52.0",
+    "eslint": "^9.4.0",
     "husky": "^8.0.3",
     "jest": "^29.7.0",
     "lint-staged": "^15.0.2",
