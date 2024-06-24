@@ -54,3 +54,14 @@ export interface ILogger {
   error(message: string): void
   warn(message: string): void
 }
+
+/* End Dependency */
+
+/* Options */
+
+export interface ISearchOptions {
+  keywords: string
+  yearLow?: number
+  yearHigh?: number
+  authors?: string[]
+}

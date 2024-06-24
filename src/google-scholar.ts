@@ -7,6 +7,7 @@ import {
   IGoogleScholarResult,
   ILogger,
   IPaper,
+  ISearchOptions,
   ISearchResponse,
   IWebClient,
   PaperUrlType,
@@ -15,7 +16,7 @@ import { sanitizeText } from './utils'
 
 export class GoogleScholar {
   private GOOGLE_SCHOLAR_URL_PREFIX: string = 'https://scholar.google.com'
-  private GOOGLE_SCHOLAR_URL: string = `${this.GOOGLE_SCHOLAR_URL_PREFIX}/scholar?hl=en&q=`
+  private GOOGLE_SCHOLAR_URL: string = `${this.GOOGLE_SCHOLAR_URL_PREFIX}/scholar`
 
   private perSecLimiter!: Bottleneck
   private perMinLimiter!: Bottleneck
@@ -36,8 +37,23 @@ export class GoogleScholar {
     })
   }
 
-  private getSearchUrl(keywords: string): string {
-    return `${this.GOOGLE_SCHOLAR_URL}${encodeURIComponent(keywords)}`
+  public getSearchUrl({ keywords, yearHigh, yearLow, authors }: ISearchOptions): string {
+    // eslint-disable-next-line camelcase
+    const params = new URLSearchParams({ hl: 'en', as_q: keywords })
+
+    if (authors) {
+      params.append('as_sauthors', authors.map(author => `"${author}"`).join('+'))
+    }
+
+    if (yearLow) {
+      params.append('as_ylo', yearLow.toString())
+    }
+
+    if (yearHigh) {
+      params.append('as_yhi', yearHigh.toString())
+    }
+
+    return `${this.GOOGLE_SCHOLAR_URL}?${params.toString()}`
   }
 
   private getUrl(path: string): string {
@@ -154,8 +170,8 @@ export class GoogleScholar {
     return url.startsWith(this.GOOGLE_SCHOLAR_URL_PREFIX)
   }
 
-  public async search(keywords: string): Promise<ISearchResponse> {
-    const url = this.getSearchUrl(keywords)
+  public async search(opts: ISearchOptions): Promise<ISearchResponse> {
+    const url = this.getSearchUrl(opts)
     return this.parseUrl(url)
   }
 

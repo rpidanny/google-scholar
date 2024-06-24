@@ -6,7 +6,7 @@ import { parseUrl, search } from './methods'
 describe('methods', () => {
   const keywords = 'hello'
   const baseUrl = `https://scholar.google.com`
-  const path = `/scholar?hl=en&q=${keywords}`
+  const path = `/scholar?hl=en&as_q=${keywords}`
 
   const page = fs.readFileSync(`${__dirname}/../test/data/page1.html`, 'utf-8')
   const content = fs.readFileSync(`${__dirname}/../test/data/page1.json`, 'utf-8')
@@ -27,7 +27,7 @@ describe('methods', () => {
     it('should call search on googleScholar', async () => {
       nock(baseUrl).get(path).reply(200, page)
 
-      const response = await search(keywords)
+      const response = await search({ keywords })
 
       expect(response).toEqual({
         ...JSON.parse(content),

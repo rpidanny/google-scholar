@@ -1,6 +1,11 @@
 {
   "version": "0.2",
   "language": "en",
-  "words": ["CRISPR", "epigenome"],
+  "words": [
+    "conventionalcommits",
+    "CRISPR",
+    "Doudna",
+    "epigenome"
+  ],
   "flagWords": []
 }
