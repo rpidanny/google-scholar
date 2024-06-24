@@ -18,7 +18,12 @@ For basic usage, you can use the helper functions `search` and `parseUrl` provid
 import { search } from '@rpidanny/google-scholar'
 
 // Search using keywords
-const result = await search('crispr cas9')
+const result = await search({
+  keywords: 'crispr cas9',
+  yearLow: 2000, // [Optional] paper published after
+  yearHigh: 2024, // [Optional] paper published before
+  authors: ['JA Doudna', 'E Charpentier'], // [Optional] Papers from authors
+})
 console.log(JSON.stringify(result, null, 2))
 
 // Parse page using url
@@ -38,7 +43,7 @@ const webClient = new WebClient()
 const googleScholar = new GoogleScholar(webClient)
 
 async function searchGoogleScholar(keywords: string) {
-  const results = await googleScholar.search(keywords)
+  const results = await googleScholar.search({ keywords })
   console.log(results)
 }
 
