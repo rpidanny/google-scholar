@@ -1,3 +1,10 @@
+# [2.0.0](https://github.com/rpidanny/google-scholar/compare/v1.2.0...v2.0.0) (2024-06-24)
+
+
+### Bug Fixes
+
+* conventionalcommits version ([10e1ce9](https://github.com/rpidanny/google-scholar/commit/10e1ce98b8af3a76d632d2916a6234c9b0f32d63))
+
 # [1.2.0](https://github.com/rpidanny/google-scholar/compare/v1.1.0...v1.2.0) (2024-06-13)
 
 

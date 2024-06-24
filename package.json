@@ -1,6 +1,6 @@
 {
   "name": "@rpidanny/google-scholar",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "A minimal TypeScript library for fetching and parsing Google Scholar pages.",
   "main": "dist/index.js",
   "types": "dist/index.d.js",
