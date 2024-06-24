@@ -83,7 +83,7 @@ describe('GoogleScholar', () => {
       })
 
       expect(url).toEqual(
-        'https://scholar.google.com/scholar?hl=en&as_q=crispr+cas9&as_sauthors=%22JA+Doudna%22%2B%22E+Charpentier%22&as_ylo=2000&as_yhi=2025',
+        'https://scholar.google.com/scholar?hl=en&as_q=crispr+cas9&as_sauthors=%22JA+Doudna%22+%22E+Charpentier%22&as_ylo=2000&as_yhi=2025',
       )
     })
 
@@ -112,7 +112,7 @@ describe('GoogleScholar', () => {
       })
 
       expect(url).toEqual(
-        'https://scholar.google.com/scholar?hl=en&as_q=crispr+cas9&as_sauthors=%22JA+Doudna%22%2B%22E+Charpentier%22',
+        'https://scholar.google.com/scholar?hl=en&as_q=crispr+cas9&as_sauthors=%22JA+Doudna%22+%22E+Charpentier%22',
       )
     })
   })

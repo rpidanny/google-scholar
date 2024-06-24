@@ -42,7 +42,7 @@ export class GoogleScholar {
     const params = new URLSearchParams({ hl: 'en', as_q: keywords })
 
     if (authors) {
-      params.append('as_sauthors', authors.map(author => `"${author}"`).join('+'))
+      params.append('as_sauthors', authors.map(author => `"${author}"`).join(' '))
     }
 
     if (yearLow) {
