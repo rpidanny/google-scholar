@@ -15,20 +15,25 @@ npm i @rpidanny/google-scholar
 For basic usage, you can use the helper functions `search` and `parseUrl` provided by the library. These functions are straightforward and easy to use.
 
 ```typescript
-import { search } from '@rpidanny/google-scholar'
+import { iteratePages, parseUrl, search } from '@rpidanny/google-scholar'
 
-// Search using keywords
-const result = await search({
+const searchOpts = {
   keywords: 'crispr cas9',
   yearLow: 2000, // [Optional] paper published after
   yearHigh: 2024, // [Optional] paper published before
   authors: ['JA Doudna', 'E Charpentier'], // [Optional] Papers from authors
-})
-console.log(JSON.stringify(result, null, 2))
+}
+
+// Get the 1st page content for a search option
+const pageContent = await search(searchOpts)
+console.log(JSON.stringify(pageContent, null, 2))
 
 // Parse page using url
-const result2 = await parseUrl('https://scholar.google.com/scholar?q=crispr+cas9&hl=en')
-console.log(JSON.stringify(result2, null, 2))
+const pageContent2 = await parseUrl('https://scholar.google.com/scholar?q=crispr+cas9&hl=en')
+console.log(JSON.stringify(pageContent2, null, 2))
+
+// Iterate over all available pages
+await iteratePages(searchOpts, pageContent => JSON.stringify(pageContent, null, 2))
 ```
 
 ### Advanced Usage
@@ -50,11 +55,13 @@ async function searchGoogleScholar(keywords: string) {
 searchGoogleScholar('crispr cas9')
 ```
 
+> Tip: Utilize [Odysseus](https://github.com/rpidanny/odysseus) as a WebClient to handle Google Captcha. It opens pages in a browser, allowing human solving of captchas to seamlessly continue the scraping process.
+
 ### Example Response
 
 ```json
 {
-  "results": [
+  "papers": [
     {
       "title": "CRISPR–Cas9 structures and mechanisms",
       "url": "https://www.annualreviews.org/doi/abs/10.1146/annurev-biophys-062215-010822",
@@ -80,7 +87,7 @@ searchGoogleScholar('crispr cas9')
       "relatedArticlesUrl": "https://scholar.google.com/scholar?q=related:WMW1j8HoFyIJ:scholar.google.com/&scioq=crispr+cas9&hl=en&as_sdt=0,5"
     }
   ],
-  "count": 594000,
+  "totalPapers": 594000,
   "nextUrl": "https://scholar.google.com/scholar?start=10&q=crispr+cas9&hl=en&as_sdt=0,5",
   "prevUrl": null
 }

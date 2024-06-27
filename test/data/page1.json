@@ -1,5 +1,5 @@
 {
-  "results": [
+  "papers": [
     {
       "title": "CRISPR–Cas9 structures and mechanisms",
       "url": "https://www.annualreviews.org/doi/abs/10.1146/annurev-biophys-062215-010822",
@@ -249,7 +249,7 @@
       "relatedArticlesUrl": "https://scholar.google.com/scholar?q=related:41v0pVwGf-oJ:scholar.google.com/&scioq=crispr+cas9&hl=en&as_sdt=0,5"
     }
   ],
-  "count": 594000,
+  "totalPapers": 594000,
   "nextUrl": "https://scholar.google.com/scholar?start=10&q=crispr+cas9&hl=en&as_sdt=0,5",
   "prevUrl": null
 }

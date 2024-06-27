@@ -18,7 +18,7 @@ export interface ICitation {
   url: string | null
 }
 
-export interface IGoogleScholarResult {
+export interface IPaperMetadata {
   title: string
   url: string
   authors: IAuthor[]
@@ -28,13 +28,13 @@ export interface IGoogleScholarResult {
   citation: ICitation
 }
 
-export interface ISearchResponse {
-  results: IGoogleScholarResult[]
-  count: number
+export interface IPageContent {
+  papers: IPaperMetadata[]
+  totalPapers: number
   nextUrl: string | null
   prevUrl: string | null
-  next: (() => Promise<ISearchResponse>) | null
-  previous: (() => Promise<ISearchResponse>) | null
+  next: (() => Promise<IPageContent>) | null
+  previous: (() => Promise<IPageContent>) | null
 }
 
 export interface ICitations {

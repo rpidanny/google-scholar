@@ -4,11 +4,11 @@ import * as cheerio from 'cheerio'
 import {
   IAuthor,
   ICitation,
-  IGoogleScholarResult,
   ILogger,
+  IPageContent,
   IPaper,
+  IPaperMetadata,
   ISearchOptions,
-  ISearchResponse,
   IWebClient,
   PaperUrlType,
 } from './interfaces'
@@ -37,6 +37,9 @@ export class GoogleScholar {
     })
   }
 
+  /*
+   * Returns the google scholar url for the given search options
+   */
   public getSearchUrl({ keywords, yearHigh, yearLow, authors }: ISearchOptions): string {
     // eslint-disable-next-line camelcase
     const params = new URLSearchParams({ hl: 'en', as_q: keywords })
@@ -56,14 +59,57 @@ export class GoogleScholar {
     return `${this.GOOGLE_SCHOLAR_URL}?${params.toString()}`
   }
 
+  /*
+   * Searches google scholar with the given search options and returns the concent of the first page
+   */
+  public async search(opts: ISearchOptions): Promise<IPageContent> {
+    return this.parseUrl(this.getSearchUrl(opts))
+  }
+
+  /*
+   * Iterates through all search result pages,
+   * invoking the provided function on each page until it returns false
+   * or there are no more pages.
+   */
+  public async iteratePages(
+    opts: ISearchOptions,
+    onPage: (page: IPageContent) => boolean,
+  ): Promise<void> {
+    const results: IPaperMetadata[] = []
+    let next: (() => Promise<IPageContent>) | null = async () => this.search(opts)
+
+    while (next) {
+      const page = await next()
+      results.push(...page.papers)
+      if (!onPage(page)) break
+      next = page.next
+    }
+  }
+
+  /*
+   * Parses the given google scholar url
+   */
+  public async parseUrl(url: string): Promise<IPageContent> {
+    if (!this.isValidUrl(url)) throw new Error(`Invalid URL: ${url}`)
+
+    this.logger?.debug(`Searching by URL: ${url}`)
+
+    return this.perMinLimiter.schedule(() => {
+      return this.perSecLimiter.schedule(async () => {
+        const html = await this.webClient.getContent(url)
+        return this.processHtml(html)
+      })
+    })
+  }
+
   private getUrl(path: string): string {
     return `${this.GOOGLE_SCHOLAR_URL_PREFIX}${path}`
   }
 
-  private processHtml(html: string): ISearchResponse {
+  private processHtml(html: string): IPageContent {
     const $ = cheerio.load(html)
 
-    const results = $('.gs_r').filter((_, element) => {
+    const papers = $('.gs_r').filter((_, element) => {
       return $(element).find('.gs_ri h3').length > 0
     })
 
@@ -74,8 +120,8 @@ export class GoogleScholar {
     const prevUrl = prev ? this.getUrl(prev) : null
 
     return {
-      results: results.toArray().map(result => this.parseResult($, $(result))),
-      count: this.getResultsCount($),
+      papers: papers.toArray().map(paper => this.parsePaperElement($, $(paper))),
+      totalPapers: this.getTotalPapersCount($),
       nextUrl,
       prevUrl,
       next: nextUrl ? async () => this.parseUrl(nextUrl) : null,
@@ -83,10 +129,10 @@ export class GoogleScholar {
     }
   }
 
-  private parseResult(
+  private parsePaperElement(
     $: cheerio.CheerioAPI,
     result: cheerio.Cheerio<cheerio.Element>,
-  ): IGoogleScholarResult {
+  ): IPaperMetadata {
     const title = sanitizeText(result.find('.gs_ri h3').text())
     const url = result.find('.gs_ri h3 a').attr('href') || ''
     const description = sanitizeText(result.find('.gs_rs').text())
@@ -159,7 +205,7 @@ export class GoogleScholar {
     return null
   }
 
-  private getResultsCount($: cheerio.CheerioAPI): number {
+  private getTotalPapersCount($: cheerio.CheerioAPI): number {
     const resultsCountText = $('#gs_ab_md').text()
     const resultsCountMatch = resultsCountText.match(/\W*((\d+|\d{1,3}(.\d{3})*)(\.\d+)?) results/)
 
@@ -168,23 +214,5 @@ export class GoogleScholar {
 
   private isValidUrl(url: string): boolean {
     return url.startsWith(this.GOOGLE_SCHOLAR_URL_PREFIX)
-  }
-
-  public async search(opts: ISearchOptions): Promise<ISearchResponse> {
-    const url = this.getSearchUrl(opts)
-    return this.parseUrl(url)
-  }
-
-  public async parseUrl(url: string): Promise<ISearchResponse> {
-    if (!this.isValidUrl(url)) throw new Error(`Invalid URL: ${url}`)
-
-    this.logger?.debug(`Searching by URL: ${url}`)
-
-    return this.perMinLimiter.schedule(() => {
-      return this.perSecLimiter.schedule(async () => {
-        const html = await this.webClient.getContent(url)
-        return this.processHtml(html)
-      })
-    })
   }
 }

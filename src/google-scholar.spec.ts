@@ -1,7 +1,7 @@
 import fs from 'fs/promises'
 
 import { GoogleScholar } from './google-scholar'
-import { ISearchResponse, IWebClient } from './interfaces'
+import { IPageContent, IWebClient } from './interfaces'
 
 describe('GoogleScholar', () => {
   const webClient: IWebClient = {
@@ -36,7 +36,7 @@ describe('GoogleScholar', () => {
 
     const expectedResponse = JSON.parse(
       await fs.readFile(`${__dirname}/../test/data/${page}.json`, 'utf-8'),
-    ) as ISearchResponse
+    ) as IPageContent
 
     expect(response).toEqual({
       ...expectedResponse,
@@ -52,7 +52,7 @@ describe('GoogleScholar', () => {
   it('should return correct next function', async () => {
     const expectedResponse = JSON.parse(
       await fs.readFile(`${__dirname}/../test/data/page1.json`, 'utf-8'),
-    ) as ISearchResponse
+    ) as IPageContent
 
     const response = await googleScholar.search({ keywords: 'some query' })
     expect(response).toEqual({
@@ -114,6 +114,60 @@ describe('GoogleScholar', () => {
       expect(url).toEqual(
         'https://scholar.google.com/scholar?hl=en&as_q=crispr+cas9&as_sauthors=%22JA+Doudna%22+%22E+Charpentier%22',
       )
+    })
+  })
+
+  describe('iteratePages', () => {
+    it('should return all papers', async () => {
+      const expectedResponse1 = JSON.parse(
+        await fs.readFile(`${__dirname}/../test/data/page1.json`, 'utf-8'),
+      ) as IPageContent
+
+      const expectedResponse2 = JSON.parse(
+        await fs.readFile(`${__dirname}/../test/data/page2.json`, 'utf-8'),
+      ) as IPageContent
+
+      const searchSpy = jest.spyOn(googleScholar, 'search')
+      searchSpy.mockResolvedValueOnce({
+        ...expectedResponse1,
+        next: async () => Promise.resolve(expectedResponse2),
+      })
+
+      const onPage = jest.fn().mockReturnValue(true)
+
+      await googleScholar.iteratePages({ keywords: 'some query' }, onPage)
+
+      expect(onPage).toHaveBeenCalledTimes(2)
+      expect(onPage).toHaveBeenNthCalledWith(1, {
+        ...expectedResponse1,
+        next: expect.any(Function),
+      })
+      expect(onPage).toHaveBeenNthCalledWith(2, expectedResponse2)
+    })
+
+    it('should stop searching if onPage returns false', async () => {
+      const expectedResponse1 = JSON.parse(
+        await fs.readFile(`${__dirname}/../test/data/page1.json`, 'utf-8'),
+      ) as IPageContent
+
+      const expectedResponse2 = JSON.parse(
+        await fs.readFile(`${__dirname}/../test/data/page2.json`, 'utf-8'),
+      ) as IPageContent
+
+      const searchSpy = jest.spyOn(googleScholar, 'search')
+      searchSpy.mockResolvedValueOnce({
+        ...expectedResponse1,
+        next: async () => Promise.resolve(expectedResponse2),
+      })
+      const onPage = jest.fn().mockReturnValue(false)
+
+      await googleScholar.iteratePages({ keywords: 'some query' }, onPage)
+
+      expect(onPage).toHaveBeenCalledTimes(1)
+      expect(onPage).toHaveBeenCalledWith({
+        ...expectedResponse1,
+        next: expect.any(Function),
+      })
     })
   })
 })
