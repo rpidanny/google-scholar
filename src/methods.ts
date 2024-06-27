@@ -26,7 +26,7 @@ export async function parseUrl(url: string): Promise<IPageContent> {
  */
 export async function iteratePages(
   opts: ISearchOptions,
-  onPage: (page: IPageContent) => boolean,
+  onPage: (page: IPageContent) => Promise<boolean>,
 ): Promise<void> {
   return googleScholar.iteratePages(opts, onPage)
 }
