@@ -1,5 +1,5 @@
 {
-  "results": [
+  "papers": [
     {
       "title": "[PDF][PDF] CRISPR/Cas9-based engineering of the epigenome",
       "url": "https://www.cell.com/cell-stem-cell/pdf/S1934-5909(17)30373-9.pdf",
@@ -226,7 +226,7 @@
       "relatedArticlesUrl": "https://scholar.google.com/scholar?q=related:p6f0gYTobnoJ:scholar.google.com/&scioq=crispr+cas9&hl=en&as_sdt=0,5"
     }
   ],
-  "count": 594000,
+  "totalPapers": 594000,
   "nextUrl": "https://scholar.google.com/scholar?start=20&q=crispr+cas9&hl=en&as_sdt=0,5",
   "prevUrl": "https://scholar.google.com/scholar?start=0&q=crispr+cas9&hl=en&as_sdt=0,5"
 }
