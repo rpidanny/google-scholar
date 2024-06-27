@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/rpidanny/google-scholar/compare/v3.0.0...v3.0.1) (2024-06-27)
+
+
+### Bug Fixes
+
+* onPage interface ([#25](https://github.com/rpidanny/google-scholar/issues/25)) ([88efcb8](https://github.com/rpidanny/google-scholar/commit/88efcb8b9632515f4b3118c1fc566d8be3090fe6))
+
 # [3.0.0](https://github.com/rpidanny/google-scholar/compare/v2.0.0...v3.0.0) (2024-06-27)
 
 # [2.0.0](https://github.com/rpidanny/google-scholar/compare/v1.2.0...v2.0.0) (2024-06-24)
