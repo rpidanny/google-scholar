@@ -73,7 +73,7 @@ export class GoogleScholar {
    */
   public async iteratePages(
     opts: ISearchOptions,
-    onPage: (page: IPageContent) => boolean,
+    onPage: (page: IPageContent) => Promise<boolean>,
   ): Promise<void> {
     const results: IPaperMetadata[] = []
     let next: (() => Promise<IPageContent>) | null = async () => this.search(opts)
@@ -81,7 +81,7 @@ export class GoogleScholar {
     while (next) {
       const page = await next()
       results.push(...page.papers)
-      if (!onPage(page)) break
+      if (!(await onPage(page))) break
       next = page.next
     }
   }
