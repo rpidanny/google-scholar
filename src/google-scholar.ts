@@ -1,5 +1,6 @@
 import Bottleneck from 'bottleneck'
 import * as cheerio from 'cheerio'
+import { chunk } from 'lodash'
 
 import {
   IAuthor,
@@ -84,6 +85,28 @@ export class GoogleScholar {
       if (!(await onPage(page))) break
       next = page.next
     }
+  }
+
+  /*
+   * Iterates through all search result papers,
+   * invoking the provided function on each paper until it returns false
+   * or there are no more papers.
+   */
+  public async iteratePapers(
+    opts: ISearchOptions,
+    onPaper: (paper: IPaperMetadata) => Promise<boolean>,
+    concurrency = 1,
+  ): Promise<void> {
+    return this.iteratePages(opts, async page => {
+      const chunks = chunk(page.papers, concurrency)
+
+      for (const chunk of chunks) {
+        const resp = await Promise.all(chunk.map(onPaper))
+        if (!resp.every(Boolean)) return false
+      }
+
+      return true
+    })
   }
 
   /*
