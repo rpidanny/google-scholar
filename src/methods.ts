@@ -1,5 +1,5 @@
 import { GoogleScholar } from './google-scholar'
-import { IPageContent, ISearchOptions } from './interfaces'
+import { IPageContent, IPaperMetadata, ISearchOptions } from './interfaces'
 import { SimpleWebClient } from './simple-web-client'
 
 const webClient = new SimpleWebClient()
@@ -29,4 +29,17 @@ export async function iteratePages(
   onPage: (page: IPageContent) => Promise<boolean>,
 ): Promise<void> {
   return googleScholar.iteratePages(opts, onPage)
+}
+
+/*
+ * Iterates through all search result papers,
+ * invoking the provided function on each paper until it returns false
+ * or there are no more papers.
+ */
+export async function iteratePapers(
+  opts: ISearchOptions,
+  onPaper: (paper: IPaperMetadata) => Promise<boolean>,
+  concurrency = 1,
+): Promise<void> {
+  return googleScholar.iteratePapers(opts, onPaper, concurrency)
 }

@@ -9,6 +9,8 @@ describe('GoogleScholar', () => {
       return fs.readFile(`${__dirname}/../test/data/page1.html`, 'utf-8')
     },
   }
+  let pageContent1: IPageContent
+  let pageContent2: IPageContent
 
   const logger = {
     debug: jest.fn(),
@@ -18,6 +20,16 @@ describe('GoogleScholar', () => {
   }
 
   let googleScholar: GoogleScholar
+
+  beforeAll(async () => {
+    pageContent1 = JSON.parse(
+      await fs.readFile(`${__dirname}/../test/data/page1.json`, 'utf-8'),
+    ) as IPageContent
+
+    pageContent2 = JSON.parse(
+      await fs.readFile(`${__dirname}/../test/data/page2.json`, 'utf-8'),
+    ) as IPageContent
+  })
 
   beforeEach(() => {
     googleScholar = new GoogleScholar(webClient, logger)
@@ -34,9 +46,7 @@ describe('GoogleScholar', () => {
 
     const response = await googleScholar.search({ keywords: 'some query' })
 
-    const expectedResponse = JSON.parse(
-      await fs.readFile(`${__dirname}/../test/data/${page}.json`, 'utf-8'),
-    ) as IPageContent
+    const expectedResponse = page === 'page1' ? pageContent1 : pageContent2
 
     expect(response).toEqual({
       ...expectedResponse,
@@ -50,13 +60,9 @@ describe('GoogleScholar', () => {
   })
 
   it('should return correct next function', async () => {
-    const expectedResponse = JSON.parse(
-      await fs.readFile(`${__dirname}/../test/data/page1.json`, 'utf-8'),
-    ) as IPageContent
-
     const response = await googleScholar.search({ keywords: 'some query' })
     expect(response).toEqual({
-      ...expectedResponse,
+      ...pageContent1,
       next: expect.any(Function),
       previous: null,
     })
@@ -65,9 +71,9 @@ describe('GoogleScholar', () => {
 
     const nextResponse = await response.next!()
 
-    expect(parseUrlSpy).toHaveBeenCalledWith(expectedResponse.nextUrl)
+    expect(parseUrlSpy).toHaveBeenCalledWith(pageContent1.nextUrl)
     expect(nextResponse).toEqual({
-      ...expectedResponse,
+      ...pageContent1,
       next: expect.any(Function),
       previous: null,
     })
@@ -119,18 +125,10 @@ describe('GoogleScholar', () => {
 
   describe('iteratePages', () => {
     it('should return all papers', async () => {
-      const expectedResponse1 = JSON.parse(
-        await fs.readFile(`${__dirname}/../test/data/page1.json`, 'utf-8'),
-      ) as IPageContent
-
-      const expectedResponse2 = JSON.parse(
-        await fs.readFile(`${__dirname}/../test/data/page2.json`, 'utf-8'),
-      ) as IPageContent
-
       const searchSpy = jest.spyOn(googleScholar, 'search')
       searchSpy.mockResolvedValueOnce({
-        ...expectedResponse1,
-        next: async () => Promise.resolve(expectedResponse2),
+        ...pageContent1,
+        next: async () => Promise.resolve(pageContent2),
       })
 
       const onPage = jest.fn().mockReturnValue(true)
@@ -139,25 +137,17 @@ describe('GoogleScholar', () => {
 
       expect(onPage).toHaveBeenCalledTimes(2)
       expect(onPage).toHaveBeenNthCalledWith(1, {
-        ...expectedResponse1,
+        ...pageContent1,
         next: expect.any(Function),
       })
-      expect(onPage).toHaveBeenNthCalledWith(2, expectedResponse2)
+      expect(onPage).toHaveBeenNthCalledWith(2, pageContent2)
     })
 
     it('should stop searching if onPage returns false', async () => {
-      const expectedResponse1 = JSON.parse(
-        await fs.readFile(`${__dirname}/../test/data/page1.json`, 'utf-8'),
-      ) as IPageContent
-
-      const expectedResponse2 = JSON.parse(
-        await fs.readFile(`${__dirname}/../test/data/page2.json`, 'utf-8'),
-      ) as IPageContent
-
       const searchSpy = jest.spyOn(googleScholar, 'search')
       searchSpy.mockResolvedValueOnce({
-        ...expectedResponse1,
-        next: async () => Promise.resolve(expectedResponse2),
+        ...pageContent1,
+        next: async () => Promise.resolve(pageContent2),
       })
       const onPage = jest.fn().mockReturnValue(false)
 
@@ -165,9 +155,59 @@ describe('GoogleScholar', () => {
 
       expect(onPage).toHaveBeenCalledTimes(1)
       expect(onPage).toHaveBeenCalledWith({
-        ...expectedResponse1,
+        ...pageContent1,
         next: expect.any(Function),
       })
+    })
+  })
+
+  describe('iteratePapers', () => {
+    it('should return all papers', async () => {
+      const searchSpy = jest.spyOn(googleScholar, 'search')
+      searchSpy.mockResolvedValueOnce({
+        ...pageContent1,
+        next: async () => Promise.resolve(pageContent2),
+      })
+
+      const onPaper = jest.fn().mockResolvedValue(true)
+
+      await googleScholar.iteratePapers({ keywords: 'some query' }, onPaper)
+
+      expect(onPaper).toHaveBeenCalledTimes(20)
+    })
+
+    it('should stop searching if onPaper returns false', async () => {
+      const searchSpy = jest.spyOn(googleScholar, 'search')
+      searchSpy.mockResolvedValueOnce({
+        ...pageContent1,
+        next: async () => Promise.resolve(pageContent2),
+      })
+
+      const onPaper = jest.fn().mockResolvedValue(false)
+
+      await googleScholar.iteratePapers({ keywords: 'some query' }, onPaper)
+
+      expect(onPaper).toHaveBeenCalledTimes(1)
+    })
+
+    it('should return all papers with concurrency', async () => {
+      const searchSpy = jest.spyOn(googleScholar, 'search')
+      searchSpy.mockResolvedValueOnce({
+        ...pageContent1,
+        next: async () => Promise.resolve(pageContent2),
+      })
+
+      const onPaper = jest.fn().mockImplementation(async () => {
+        await new Promise(resolve => setTimeout(resolve, 100))
+        return true
+      })
+
+      const start = Date.now()
+      await googleScholar.iteratePapers({ keywords: 'some query' }, onPaper, 10)
+      const end = Date.now()
+
+      expect(onPaper).toHaveBeenCalledTimes(20)
+      expect((end - start) / 10).toBeCloseTo(200 / 10, 0.1)
     })
   })
 })
