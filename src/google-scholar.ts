@@ -7,11 +7,11 @@ import {
   ICitation,
   ILogger,
   IPageContent,
-  IPaper,
   IPaperMetadata,
+  IPaperSource,
   ISearchOptions,
   IWebClient,
-  PaperUrlType,
+  PaperSourceType,
 } from './interfaces'
 import { sanitizeText } from './utils'
 
@@ -164,16 +164,16 @@ export class GoogleScholar {
       title,
       url,
       description,
-      paper: this.getPaper(result),
+      source: this.getPaperSource(result),
       authors: this.getAuthors($, result),
       citation: this.getCitation($, result),
       relatedArticlesUrl: this.getRelatedArticlesUrl($, result),
     }
   }
 
-  private getPaper(result: cheerio.Cheerio<cheerio.Element>): IPaper {
+  private getPaperSource(result: cheerio.Cheerio<cheerio.Element>): IPaperSource {
     const type =
-      result.find('span.gs_ctg2').text() === '[PDF]' ? PaperUrlType.PDF : PaperUrlType.HTML
+      result.find('span.gs_ctg2').text() === '[PDF]' ? PaperSourceType.PDF : PaperSourceType.HTML
     const url = result.find('.gs_ggsd a').attr('href') || ''
 
     return {
