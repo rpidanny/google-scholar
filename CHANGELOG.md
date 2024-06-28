@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/rpidanny/google-scholar/compare/v3.0.1...v3.1.0) (2024-06-28)
+
+
+### Features
+
+* add iteratePapers ([#26](https://github.com/rpidanny/google-scholar/issues/26)) ([62d06ef](https://github.com/rpidanny/google-scholar/commit/62d06efa0438cc4a8ef42516f04b66cb4a83c8ad))
+
 ## [3.0.1](https://github.com/rpidanny/google-scholar/compare/v3.0.0...v3.0.1) (2024-06-27)
 
 
