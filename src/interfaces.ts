@@ -1,10 +1,10 @@
-export enum PaperUrlType {
+export enum PaperSourceType {
   PDF = 'pdf',
   HTML = 'html',
 }
 
-export interface IPaper {
-  type: PaperUrlType
+export interface IPaperSource {
+  type: PaperSourceType
   url: string
 }
 
@@ -24,7 +24,7 @@ export interface IPaperMetadata {
   authors: IAuthor[]
   description: string
   relatedArticlesUrl: string | null
-  paper: IPaper
+  source: IPaperSource
   citation: ICitation
 }
 
