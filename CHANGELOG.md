@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/rpidanny/google-scholar/compare/v3.1.0...v3.2.0) (2024-06-28)
+
+
+### Features
+
+* rename paper.paper to paper.source ([#27](https://github.com/rpidanny/google-scholar/issues/27)) ([4137b3f](https://github.com/rpidanny/google-scholar/commit/4137b3f692173954f4c2635ae6b97ffa06f364a4))
+
 # [3.1.0](https://github.com/rpidanny/google-scholar/compare/v3.0.1...v3.1.0) (2024-06-28)
 
 
