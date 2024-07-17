@@ -1,3 +1,10 @@
+# [3.3.0](https://github.com/rpidanny/google-scholar/compare/v3.2.0...v3.3.0) (2024-07-17)
+
+
+### Features
+
+* update odysseus version ([#31](https://github.com/rpidanny/google-scholar/issues/31)) ([968182d](https://github.com/rpidanny/google-scholar/commit/968182d6221e00dbc7004cb008bb9902bf7b980c))
+
 # [3.2.0](https://github.com/rpidanny/google-scholar/compare/v3.1.0...v3.2.0) (2024-06-28)
 
 
