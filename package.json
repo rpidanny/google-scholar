@@ -35,7 +35,7 @@
     "@commitlint/cli": "^18.2.0",
     "@commitlint/config-conventional": "^18.1.0",
     "@rpidanny/eslint-config-typescript": "^1.4.1",
-    "@rpidanny/odysseus": "^1.1.0",
+    "@rpidanny/odysseus": "^2.6.0",
     "@rpidanny/quill": "^1.5.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^11.0.0",
